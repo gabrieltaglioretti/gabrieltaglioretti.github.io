@@ -1,103 +1,523 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cyberpunk Pixel Search</title>
-  <style>
-    @keyframes flicker {
-      0% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff; }
-      50% { text-shadow: 0 0 8px #ff00ff, 0 0 15px #ff00ff; }
-      100% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff; }
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: url('fondo.gif') no-repeat center center fixed;
-      background-size: cover;
-      transition: background-image 1s ease-in-out;
-    }
-
-    .search-container {
-      position: relative;
-      margin-bottom: 10px;
-      margin-top: 400px;
-    }
-
-    input {
-      width: 300px;
-      padding: 10px;
-      font-size: 16px;
-      text-align: center;
-      outline: none;
-      background: black;
-      color: white;
-      font-family: Verdana, sans-serif;
-      animation: flicker 1.5s infinite alternate;
-      border: 3px solid #ff00ff;
-      image-rendering: pixelated;
-      box-shadow: 0px 0px 8px #ff00ff, inset 0px 0px 8px #ff00ff;
-      border-image: black;
-    }
-
-    .icon-bar {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .icon-bar a {
-      display: inline-block;
-      width: 80px;
-      height: 80px;
-    }
-
-    .icon-bar img {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0px 0px 5px #ff00ff);
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramas DDD - Plataforma de Publicaciones Científicas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .diagram-section {
+            padding: 40px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .diagram-section:last-child {
+            border-bottom: none;
+        }
+        
+        .diagram-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 300;
+        }
+        
+        .class-diagram {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        
+        .deployment-diagram {
+            background: #f1f3f4;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .entity {
+            background: #e3f2fd;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            display: inline-block;
+            vertical-align: top;
+            min-width: 200px;
+        }
+        
+        .entity-title {
+            font-weight: bold;
+            color: #1976d2;
+            font-size: 14px;
+            border-bottom: 1px solid #1976d2;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .value-object {
+            background: #fff3e0;
+            border: 2px solid #f57c00;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            vertical-align: top;
+            min-width: 150px;
+        }
+        
+        .value-object-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 12px;
+            border-bottom: 1px solid #f57c00;
+            padding-bottom: 3px;
+            margin-bottom: 8px;
+        }
+        
+        .service {
+            background: #f3e5f5;
+            border: 2px solid #7b1fa2;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            display: inline-block;
+            vertical-align: top;
+            min-width: 180px;
+        }
+        
+        .service-title {
+            font-weight: bold;
+            color: #7b1fa2;
+            font-size: 14px;
+            border-bottom: 1px solid #7b1fa2;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .microservice {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border: 2px solid #4caf50;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            min-width: 180px;
+            text-align: center;
+        }
+        
+        .microservice-title {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .microservice-desc {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .connection {
+            stroke: #666;
+            stroke-width: 2;
+            fill: none;
+            marker-end: url(#arrowhead);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .legend {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .legend-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        
+        .flow-diagram {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .arrow {
+            font-size: 24px;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .diagram-section {
+                padding: 20px;
+            }
+            
+            .entity, .value-object, .service, .microservice {
+                min-width: auto;
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .flow-diagram {
+                flex-direction: column;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="search-container">
-    <form action="https://www.google.com/search" method="GET">
-      <input type="text" name="q" autofocus>
-    </form>
-  </div>
-
-  <div class="icon-bar">
-    <a href="https://chat.openai.com" target="_blank"><img src="https://img.icons8.com/ios7/600/chatgpt.png" alt="ChatGPT"></a>
-    <a href="https://www4.baehost.com:8443/login_up.php?success_redirect_url=%2Fsmb%2Fiis-app-pool%2Fsettings%2Fid%2F67" target="_blank"><img src="https://www4.baehost.com:8443/cp/theme/images/logos/plesk/logo.svg" alt="Plesk"></a>
-    <a href="https://www.youtube.com/@LofiGirl/streams" target="_blank"><img src="https://styles.redditmedia.com/t5_2i035a/styles/communityIcon_ci4v17q28cbe1.png" alt="LofiGirl"></a>
-    <a href="https://claude.ai/new" target="_blank"><img src="https://registry.npmmirror.com/@lobehub/icons-static-png/1.43.0/files/dark/claude-color.png" alt="Claude"></a>
-    <a href="https://agendate.ar/login" target="_blank"><img src="https://agendate.ar/customAgendateIndex/images/logoAge.png" alt="Agendate"></a>
-    <a href="https://localhost:53107/swagger/index.html" target="_blank"><img src="https://static-00.iconduck.com/assets.00/swagger-icon-2048x2048-563qbzey.png" alt="Swagger"></a>
-	<a href="https://mail.proton.me/u/0/inbox" target="_blank"><img src="https://img.icons8.com/fluent/512/protonmail-2.png" alt="ProtonMail"></a>
-	
-  </div>
-
-  <script>
-    const backgrounds = [     'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGV6MTU2bHhrcXUwcXNseDh6aWNkdzlqdTUzcHU5bXFxZHBzaWlxNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NKEt9elQ5cR68/giphy.gif',          
-	'fondo.gif',
-	'5927911.gif',
-	'8351164.gif'
-    ];
-
-
-    let current = 0;
-
-    setInterval(() => {
-      current = (current + 1) % backgrounds.length;
-      document.body.style.backgroundImage = `url('${backgrounds[current]}')`;
-    }, 5000); // Cambia cada 10 segundos
-  </script>
+    <div class="container">
+        <div class="header">
+            <h1>Diagramas DDD - Plataforma de Publicaciones Científicas</h1>
+            <p>Domain-Driven Design aplicado a microservicios</p>
+        </div>
+        
+        <!-- Diagrama de Clases/Modelo de Agregados -->
+        <div class="diagram-section">
+            <h2 class="diagram-title">Diagrama de Clases - Bounded Context: Postulaciones</h2>
+            
+            <div class="legend">
+                <div class="legend-title">Leyenda:</div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #e3f2fd; border: 2px solid #1976d2;"></div>
+                    <span>Entidades (Entities)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #fff3e0; border: 2px solid #f57c00;"></div>
+                    <span>Objetos de Valor (Value Objects)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f3e5f5; border: 2px solid #7b1fa2;"></div>
+                    <span>Servicios de Dominio</span>
+                </div>
+            </div>
+            
+            <div class="class-diagram">
+                <!-- Agregado Principal -->
+                <div class="entity">
+                    <div class="entity-title">🏛️ Articulo (Aggregate Root)</div>
+                    <div>- articuloId: ArticuloId</div>
+                    <div>- titulo: String</div>
+                    <div>- autorId: AutorId</div>
+                    <div>- contenido: ContenidoArticulo</div>
+                    <div>- estado: EstadoArticulo</div>
+                    <div>- fechaEnvio: FechaLimite</div>
+                    <div>- versiones: List&lt;Version&gt;</div>
+                    <div>- revisiones: List&lt;Revision&gt;</div>
+                    <br>
+                    <div>+ enviar()</div>
+                    <div>+ actualizarVersion()</div>
+                    <div>+ asignarRevision()</div>
+                    <div>+ cambiarEstado()</div>
+                </div>
+                
+                <!-- Entidades -->
+                <div class="entity">
+                    <div class="entity-title">📄 Version</div>
+                    <div>- versionId: VersionId</div>
+                    <div>- numeroVersion: int</div>
+                    <div>- archivo: ArchivoAdjunto</div>
+                    <div>- fechaCreacion: DateTime</div>
+                    <div>- comentarios: String</div>
+                    <br>
+                    <div>+ crearNuevaVersion()</div>
+                    <div>+ validarFormato()</div>
+                </div>
+                
+                <div class="entity">
+                    <div class="entity-title">👥 Revision</div>
+                    <div>- revisionId: RevisionId</div>
+                    <div>- revisorId: RevisorId</div>
+                    <div>- estado: EstadoRevision</div>
+                    <div>- comentarios: String</div>
+                    <div>- puntuacion: Puntuacion</div>
+                    <div>- fechaAsignacion: DateTime</div>
+                    <div>- fechaCompleta: DateTime</div>
+                    <br>
+                    <div>+ asignar()</div>
+                    <div>+ completar()</div>
+                    <div>+ validarRevisor()</div>
+                </div>
+                
+                <!-- Objetos de Valor -->
+                <div class="value-object">
+                    <div class="value-object-title">🔖 ORCID</div>
+                    <div>- valor: String</div>
+                    <br>
+                    <div>+ validar()</div>
+                    <div>+ formatear()</div>
+                </div>
+                
+                <div class="value-object">
+                    <div class="value-object-title">🏢 Afiliacion</div>
+                    <div>- institucion: String</div>
+                    <div>- pais: String</div>
+                    <div>- departamento: String</div>
+                </div>
+                
+                <div class="value-object">
+                    <div class="value-object-title">📅 FechaLimite</div>
+                    <div>- fecha: DateTime</div>
+                    <br>
+                    <div>+ esVigente()</div>
+                    <div>+ diasRestantes()</div>
+                </div>
+                
+                <div class="value-object">
+                    <div class="value-object-title">🎯 Especialidad</div>
+                    <div>- area: String</div>
+                    <div>- subarea: String</div>
+                    <div>- keywords: List&lt;String&gt;</div>
+                </div>
+                
+                <!-- Servicios de Dominio -->
+                <div class="service">
+                    <div class="service-title">⚙️ AsignadorDeRevisores</div>
+                    <div>+ asignarRevisores(articulo, criterios)</div>
+                    <div>+ validarConflictoInteres()</div>
+                    <div>+ buscarPorEspecialidad()</div>
+                    <div>+ verificarDisponibilidad()</div>
+                </div>
+                
+                <div class="service">
+                    <div class="service-title">📊 EvaluadorDeRevision</div>
+                    <div>+ evaluarArticulo(revisiones)</div>
+                    <div>+ calcularPuntuacion()</div>
+                    <div>+ determinarEstado()</div>
+                    <div>+ generarReporte()</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin: 20px 0; color: #666;">
+                <strong>Relaciones principales:</strong><br>
+                Articulo (1) ←→ (*) Version | Articulo (1) ←→ (*) Revision<br>
+                AsignadorDeRevisores utiliza Especialidad y ORCID<br>
+                EvaluadorDeRevision procesa múltiples Revision
+            </div>
+        </div>
+        
+        <!-- Diagrama de Despliegue -->
+        <div class="diagram-section">
+            <h2 class="diagram-title">Diagrama de Despliegue - Arquitectura de Microservicios</h2>
+            
+            <div class="flow-diagram">
+                <div class="microservice">
+                    <div class="microservice-title">🌐 API Gateway</div>
+                    <div class="microservice-desc">
+                        Punto único de entrada<br>
+                        Enrutamiento<br>
+                        Autenticación<br>
+                        Rate limiting
+                    </div>
+                </div>
+                
+                <div class="arrow">⬇️</div>
+                
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+                    <div class="microservice">
+                        <div class="microservice-title">👤 MS-Autores</div>
+                        <div class="microservice-desc">
+                            Gestión de perfiles<br>
+                            Autenticación ORCID<br>
+                            Métricas personales<br>
+                            Puerto: 8001
+                        </div>
+                    </div>
+                    
+                    <div class="microservice">
+                        <div class="microservice-title">📚 MS-Publicaciones</div>
+                        <div class="microservice-desc">
+                            Envío de artículos<br>
+                            Versionado<br>
+                            Fechas límite<br>
+                            Puerto: 8002
+                        </div>
+                    </div>
+                    
+                    <div class="microservice">
+                        <div class="microservice-title">🔍 MS-Revisiones</div>
+                        <div class="microservice-desc">
+                            Asignación de revisores<br>
+                            Proceso de revisión<br>
+                            Evaluación ciega<br>
+                            Puerto: 8003
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="arrow">⬇️</div>
+                
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+                    <div class="microservice">
+                        <div class="microservice-title">📝 MS-Editorial</div>
+                        <div class="microservice-desc">
+                            Gestión de eventos<br>
+                            Reglas editoriales<br>
+                            Certificados<br>
+                            Puerto: 8004
+                        </div>
+                    </div>
+                    
+                    <div class="microservice">
+                        <div class="microservice-title">📊 MS-Métricas</div>
+                        <div class="microservice-desc">
+                            Análisis de datos<br>
+                            Reportes automáticos<br>
+                            Exportación<br>
+                            Puerto: 8005
+                        </div>
+                    </div>
+                    
+                    <div class="microservice">
+                        <div class="microservice-title">🔗 MS-Integraciones</div>
+                        <div class="microservice-desc">
+                            ORCID, Scopus<br>
+                            Google Scholar<br>
+                            Validación DOI<br>
+                            Puerto: 8006
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="arrow">⬇️</div>
+                
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+                    <div class="microservice" style="border-color: #ff9800; background: linear-gradient(145deg, #fff3e0, #ffe0b2);">
+                        <div class="microservice-title" style="color: #f57c00;">📨 Message Bus</div>
+                        <div class="microservice-desc">
+                            Apache Kafka<br>
+                            Eventos de dominio<br>
+                            Comunicación asíncrona<br>
+                            Pub/Sub
+                        </div>
+                    </div>
+                    
+                    <div class="microservice" style="border-color: #9c27b0; background: linear-gradient(145deg, #f3e5f5, #e1bee7);">
+                        <div class="microservice-title" style="color: #7b1fa2;">🗄️ Bases de Datos</div>
+                        <div class="microservice-desc">
+                            PostgreSQL (transaccional)<br>
+                            MongoDB (documentos)<br>
+                            Redis (cache)<br>
+                            Elasticsearch (búsqueda)
+                        </div>
+                    </div>
+                    
+                    <div class="microservice" style="border-color: #607d8b; background: linear-gradient(145deg, #eceff1, #cfd8dc);">
+                        <div class="microservice-title" style="color: #455a64;">🔒 Infraestructura</div>
+                        <div class="microservice-desc">
+                            Docker containers<br>
+                            Kubernetes<br>
+                            Load balancer<br>
+                            Monitoring
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: #f8f9fa; border-radius: 8px; padding: 25px; margin: 30px 0;">
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">🔄 Patrones de Comunicación</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div>
+                        <strong>📡 Comunicación Síncrona (REST):</strong><br>
+                        • API Gateway ↔ Microservicios<br>
+                        • Consultas de perfil de autor<br>
+                        • Validaciones inmediatas<br>
+                        • Operaciones CRUD simples
+                    </div>
+                    <div>
+                        <strong>⚡ Comunicación Asíncrona (Eventos):</strong><br>
+                        • ArticuloEnviado → MS-Revisiones<br>
+                        • RevisionAsignada → MS-Métricas<br>
+                        • ArticuloAceptado → MS-Editorial<br>
+                        • CertificadoEmitido → MS-Autores
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: #e8f5e8; border-radius: 8px; padding: 25px; margin: 30px 0;">
+                <h3 style="color: #2e7d32; margin-bottom: 20px;">🛡️ Aspectos Transversales</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                    <div><strong>Seguridad:</strong> JWT, OAuth 2.0, RBAC</div>
+                    <div><strong>Monitoreo:</strong> Prometheus, Grafana, Jaeger</div>
+                    <div><strong>Logging:</strong> ELK Stack (Elasticsearch, Logstash, Kibana)</div>
+                    <div><strong>Configuración:</strong> Config Server, Consul</div>
+                    <div><strong>Resiliencia:</strong> Circuit Breaker, Retry, Timeout</div>
+                    <div><strong>Testing:</strong> Contract Testing, Integration Tests</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
