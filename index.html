@@ -57,6 +57,13 @@
             color: #a8d8ff;
             margin-bottom: 5px;
         }
+		
+		.centered-list {
+		display: flex;
+		flex-direction: column;
+		align-items: center; /* Centrado horizontal */
+		text-align: center;
+}
         
         .info-value {
             color: #ffffff;
@@ -352,7 +359,7 @@
 <body>
     <div class="container">
         <div class="academic-header">
-            <h1>Diagramas DDD - Plataforma de Publicaciones Científicas</h1>
+            <h1>Universidad Abierta Interamericana</h1>
             <div class="academic-info">
                 <div class="info-item">
                     <div class="info-label">Carrera:</div>
@@ -362,18 +369,25 @@
                     <div class="info-label">Materia:</div>
                     <div class="info-value">Diseño y Arquitectura de Software</div>
                 </div>
+				<div class="info-item">
+					<div class="info-label">Profesores:</div>
+					<div class="info-value centered-list">
+						<div>Dr. Gustavo Hector Rossi</div>
+						<div>Mg. Nicolás Battaglia</div>
+					</div>
+				</div>
                 <div class="info-item">
-                    <div class="info-label">Profesores:</div>
-                    <div class="info-value">Gustavo Hector Rossi - Nicolás Battaglia</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">Trabajo Practico:</div>
+                    <div class="info-label">Trabajo Práctico:</div>
                     <div class="info-value">DDD Parte Uno.</div>
                 </div>
-				<div class="info-item">
-                    <div class="info-label">Alumnos:</div>
-                    <div class="info-value">Rodrigo Borquez, Sebastian Romero y Gabriel Taglioretti.</div>
-                </div>
+			<div class="info-item">
+				<div class="info-label">Alumnos:</div>
+				<div class="info-value centered-list">
+					<div>Ing. Rodrigo Borquez</div>
+					<div>Ing. Sebastian Romero</div>
+					<div>Ing. Gabriel Taglioretti</div>
+				</div>
+			</div>
             </div>
         </div>
         
@@ -384,8 +398,10 @@
         
         <!-- Diagrama de Clases/Modelo de Agregados -->
         <div class="diagram-section">
+
             <h2 class="diagram-title">Diagrama de Clases - Bounded Context: Postulaciones</h2>
-            
+
+
             <div class="legend">
                 <div class="legend-title">Leyenda:</div>
                 <div class="legend-item">
