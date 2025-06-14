@@ -285,6 +285,23 @@
                 
                 <!-- Entidades -->
                 <div class="entity">
+                    <div class="entity-title">👤 Autor</div>
+                    <div>- autorId: AutorId</div>
+                    <div>- nombre: String</div>
+                    <div>- email: Email</div>
+                    <div>- orcid: ORCID</div>
+                    <div>- afiliacion: Afiliacion</div>
+                    <div>- especialidades: List&lt;Especialidad&gt;</div>
+                    <div>- metricas: MetricasAutor</div>
+                    <div>- fechaRegistro: DateTime</div>
+                    <br>
+                    <div>+ registrar()</div>
+                    <div>+ actualizarPerfil()</div>
+                    <div>+ validarORCID()</div>
+                    <div>+ puedeEnviarArticulo()</div>
+                </div>
+                
+                <div class="entity">
                     <div class="entity-title">📄 Version</div>
                     <div>- versionId: VersionId</div>
                     <div>- numeroVersion: int</div>
@@ -312,6 +329,22 @@
                 </div>
                 
                 <!-- Objetos de Valor -->
+                <div class="value-object">
+                    <div class="value-object-title">📧 Email</div>
+                    <div>- direccion: String</div>
+                    <br>
+                    <div>+ validar()</div>
+                    <div>+ esDominioValido()</div>
+                </div>
+                
+                <div class="value-object">
+                    <div class="value-object-title">📊 MetricasAutor</div>
+                    <div>- hIndex: int</div>
+                    <div>- publicaciones: int</div>
+                    <div>- citas: int</div>
+                    <div>- impacto: double</div>
+                </div>
+                
                 <div class="value-object">
                     <div class="value-object-title">🔖 ORCID</div>
                     <div>- valor: String</div>
@@ -362,9 +395,10 @@
             
             <div style="text-align: center; margin: 20px 0; color: #666;">
                 <strong>Relaciones principales:</strong><br>
-                Articulo (1) ←→ (*) Version | Articulo (1) ←→ (*) Revision<br>
-                AsignadorDeRevisores utiliza Especialidad y ORCID<br>
-                EvaluadorDeRevision procesa múltiples Revision
+                Autor (1) ←→ (*) Articulo | Articulo (1) ←→ (*) Version | Articulo (1) ←→ (*) Revision<br>
+                Autor contiene ORCID, Email, Afiliacion, MetricasAutor y Especialidades<br>
+                AsignadorDeRevisores utiliza Especialidad y ORCID para matching<br>
+                EvaluadorDeRevision procesa múltiples Revision para determinar estado del Articulo
             </div>
         </div>
         
