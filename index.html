@@ -22,6 +22,47 @@
             overflow: hidden;
         }
         
+        .academic-header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            border-bottom: 3px solid #0f3460;
+        }
+        
+        .academic-header h1 {
+            margin: 0 0 15px 0;
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        
+        .academic-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+        
+        .info-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4a90e2;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #a8d8ff;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            color: #ffffff;
+            line-height: 1.4;
+        }
+        
         .header {
             background: linear-gradient(45deg, #2c3e50, #3498db);
             color: white;
@@ -216,7 +257,76 @@
             font-weight: bold;
         }
         
+        .key-points {
+            background: linear-gradient(135deg, #fff5f5, #f0f8ff);
+            border: 2px solid #ff6b6b;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .key-points h3 {
+            color: #d63384;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .key-point {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+        }
+        
+        .key-point strong {
+            color: #d63384;
+            font-size: 1.1em;
+        }
+        
+        .example-flow {
+            background: linear-gradient(135deg, #e8f5e8, #f0fff0);
+            border: 2px solid #28a745;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .example-flow h3 {
+            color: #2e7d32;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .flow-step {
+            margin: 12px 0;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .flow-step strong {
+            color: #2e7d32;
+        }
+        
+        .scenario {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-style: italic;
+            color: #856404;
+        }
+        
         @media (max-width: 768px) {
+            .academic-info {
+                grid-template-columns: 1fr;
+            }
+            
             .diagram-section {
                 padding: 20px;
             }
@@ -239,6 +349,32 @@
 </head>
 <body>
     <div class="container">
+        <div class="academic-header">
+            <h1>Diagramas DDD - Plataforma de Publicaciones Científicas</h1>
+            <div class="academic-info">
+                <div class="info-item">
+                    <div class="info-label">Carrera:</div>
+                    <div class="info-value">Especialización en IA</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Materia:</div>
+                    <div class="info-value">Diseño y Arquitectura de Software</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Profesores:</div>
+                    <div class="info-value">Gustavo Hector Rossi - Nicolás Battaglia</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Trabajo Practico:</div>
+                    <div class="info-value">DDD Parte Uno.</div>
+                </div>
+				<div class="info-item">
+                    <div class="info-label">Alumnos:</div>
+                    <div class="info-value">Rodrigo Borquez, Sebastian Romero y Gabriel Taglioretti.</div>
+                </div>
+            </div>
+        </div>
+        
         <div class="header">
             <h1>Diagramas DDD - Plataforma de Publicaciones Científicas</h1>
             <p>Domain-Driven Design aplicado a microservicios</p>
@@ -539,16 +675,76 @@
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Puntos Clave -->
+        <div class="diagram-section">
+            <div class="key-points">
+                <h3>🔑 Puntos Clave</h3>
+                
+                <div class="key-point">
+                    <strong>1. Enfoque en el Negocio</strong><br>
+                    "No estamos haciendo microservicios por moda, sino porque el dominio académico tiene complejidades que requieren esta organización"
+                </div>
+                
+                <div class="key-point">
+                    <strong>2. Decisiones Justificadas</strong><br>
+                    "Cada bounded context refleja cómo realmente trabajan los equipos académicos: autores, revisores, editores tienen procesos y terminología diferente"
+                </div>
+                
+                <div class="key-point">
+                    <strong>3. Flexibilidad Real</strong><br>
+                    "Las reglas editoriales pueden cambiar sin tocar código: configuración dinámica por revista o congreso"
+                </div>
+                
+                <div class="key-point">
+                    <strong>4. Escalabilidad Inteligente</strong><br>
+                    "El sistema de revisiones puede manejar picos de actividad sin afectar el envío de artículos"
+                </div>
+                
+                <div class="key-point">
+                    <strong>5. Mantenibilidad a Largo Plazo</strong><br>
+                    "Equipos distribuidos pueden trabajar independientemente sin pisarse, acelerando el desarrollo"
+                </div>
+            </div>
             
-            <div style="background: #e8f5e8; border-radius: 8px; padding: 25px; margin: 30px 0;">
-                <h3 style="color: #2e7d32; margin-bottom: 20px;">🛡️ Aspectos Transversales</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
-                    <div><strong>Seguridad:</strong> JWT, OAuth 2.0, RBAC</div>
-                    <div><strong>Monitoreo:</strong> Prometheus, Grafana, Jaeger</div>
-                    <div><strong>Logging:</strong> ELK Stack (Elasticsearch, Logstash, Kibana)</div>
-                    <div><strong>Configuración:</strong> Config Server, Consul</div>
-                    <div><strong>Resiliencia:</strong> Circuit Breaker, Retry, Timeout</div>
-                    <div><strong>Testing:</strong> Contract Testing, Integration Tests</div>
+            <div class="example-flow">
+                <h3>🎯 Ejemplo Práctico de Flujo Completo</h3>
+                
+                <div class="scenario">
+                    <strong>Escenario: "Dr. Romero envía artículo sobre IA a conferencia ICML"</strong>
+                </div>
+                
+                <div class="flow-step">
+                    <strong>1. MS-Autores:</strong> Valida perfil y ORCID del Dr. Romero
+                </div>
+                
+                <div class="flow-step">
+                    <strong>2. MS-Publicaciones:</strong> Recibe artículo, valida fecha límite, emite ArticuloEnviado
+                </div>
+                
+                <div class="flow-step">
+                    <strong>3. MS-Revisiones:</strong> Consume evento, busca revisores por especialidad "Machine Learning"
+                </div>
+                
+                <div class="flow-step">
+                    <strong>4. MS-Editorial:</strong> Aplica reglas de ICML (revisión doble ciega, 3 revisores)
+                </div>
+                
+                <div class="flow-step">
+                    <strong>5. MS-Revisiones:</strong> Asigna revisores, emite RevisionAsignada
+                </div>
+                
+                <div class="flow-step">
+                    <strong>6. MS-Métricas:</strong> Actualiza estadísticas de envíos por área
+                </div>
+                
+                <div class="flow-step">
+                    <strong>7. MS-Integraciones:</strong> Sincroniza con Google Scholar para métricas actualizadas
+                </div>
+                
+                <div style="background: #d4edda; border: 1px solid #c3e6cb; border-radius: 8px; padding: 15px; margin: 20px 0; text-align: center;">
+                    <strong>Resultado:</strong> Proceso completo sin acoplamiento, cada servicio cumple su responsabilidad específica.
                 </div>
             </div>
         </div>
